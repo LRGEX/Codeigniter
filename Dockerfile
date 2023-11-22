@@ -63,11 +63,6 @@ RUN chmod +x /opt/ci/docker-entrypoint.sh
 # Set the ServerName directive
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 
-# Set the base URL in the CodeIgniter configuration file and the Constants file
-RUN sed -i 's/public string $baseURL = .*/public $baseURL = BASE;/' /var/www/html/app/Config/App.php && \
-    echo "\$protocol = isset(\$_SERVER['HTTPS']) && \$_SERVER['HTTPS'] != 'off' ? 'https://' . \$_SERVER['HTTP_HOST'] : 'http://' . \$_SERVER['HTTP_HOST'];" >> /var/www/html/app/Config/Constants.php && \
-    echo " defined('BASE') || define('BASE', \$protocol);" >> /var/www/html/app/Config/Constants.php 
-
 
 
 # Start Apache server in the foreground

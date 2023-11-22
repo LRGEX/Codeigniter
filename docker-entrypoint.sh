@@ -26,6 +26,12 @@ if [ -z "$(ls -A $MOUNTED_DIR)" ]; then
     # Change ownership to www-data and set appropriate permissions
     chown -R www-data:www-data $MOUNTED_DIR
     chmod -R 777 $MOUNTED_DIR
+    # Set the base URL in the CodeIgniter configuration file and the Constants file
+    sed -i 's/public string $baseURL = .*/public $baseURL = BASE;/' /var/www/html/app/Config/App.php && \
+    echo "\$protocol = isset(\$_SERVER['HTTPS']) && \$_SERVER['HTTPS'] != 'off' ? 'https://' . \$_SERVER['HTTP_HOST'] : 'http://' . \$_SERVER['HTTP_HOST'];" >> /var/www/html/app/Config/Constants.php && \
+    echo " defined('BASE') || define('BASE', \$protocol);" >> /var/www/html/app/Config/Constants.php 
+
+
 fi
 
 # Start Apache in the foreground
