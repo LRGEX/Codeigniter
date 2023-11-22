@@ -1,8 +1,0 @@
-I dont know the exact solution but i shared my way of solution to you Go to app/Config/Constants.php
-
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
-    defined('BASE') || define('BASE',$protocol);
-In app/Config/App.php
-
- public $baseURL    = BASE;
-Hope this Helps
