@@ -17,10 +17,6 @@ BACKUP_DIR="/var/www/html_backup"
 
 # Path to the mounted directory
 MOUNTED_DIR="/var/www/html"
-lrgex_flag=$(grep -c "started" /opt/ci/flags)
-codeigniter_flag=$(grep -c "defined('BASE')" /var/www/html/app/Config/Constants.php)
-
-
 
 # Check if the mounted directory is empty
 if [ -z "$(ls -A $MOUNTED_DIR)" ]; then
@@ -33,7 +29,7 @@ if [ -z "$(ls -A $MOUNTED_DIR)" ]; then
     sleep 2
 fi
 
-if [ $lrgex_flag -eq 0 ];then
+if ! grep -q "started" /opt/ci/flags; then
     echo ""
     echo "Configuring Permissions..."
     echo ""
@@ -47,7 +43,7 @@ if [ $lrgex_flag -eq 0 ];then
     sleep 2
 fi
 
-if [ $codeigniter_flag -eq 0 ];then
+if ! grep -q "defined('BASE')" /var/www/html/app/Config/Constants.php; then
     echo ""
     echo "Configuring CodeIgniter Base url..."
     echo ""
