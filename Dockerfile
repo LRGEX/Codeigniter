@@ -63,7 +63,5 @@ RUN chmod +x /opt/ci/docker-entrypoint.sh
 # Set the ServerName directive
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 
-
-
 # Start Apache server in the foreground
 ENTRYPOINT ["/opt/ci/docker-entrypoint.sh"]
