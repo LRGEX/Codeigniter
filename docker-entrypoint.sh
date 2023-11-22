@@ -33,13 +33,13 @@ if [ -z "$(ls -A $MOUNTED_DIR)" ]; then
     sleep 2
 fi
 
-if [$lrgex_flag == false ];then
+if [ $lrgex_flag -eq 0 ];then
     echo ""
     echo "Configuring Permissions..."
     echo ""
     # Change ownership to www-data and set appropriate permissions
     chown -R www-data:www-data $MOUNTED_DIR
-    chmod -R 777 $MOUNTED_DIR
+    chmod -R 755 $MOUNTED_DIR
     touch /opt/ci/flags
     echo "started" >> /opt/ci/flags
     echo ""
@@ -47,7 +47,7 @@ if [$lrgex_flag == false ];then
     sleep 2
 fi
 
-if [$codeigniter_flag == false ];then
+if [ $codeigniter_flag -eq 0 ];then
     echo ""
     echo "Configuring CodeIgniter Base url..."
     echo ""
