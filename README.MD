@@ -4,6 +4,10 @@
 <p align="center"><img src="https://download.lrgex.com/ci.png" alt= “” width="150" height="150"></p>
 
 
+docker run -d --name lrgex-app -v /home/lrgex/app:/var/www/html -p 8585:80 lrgex/codeigniter
+
+
+
 
 
 
