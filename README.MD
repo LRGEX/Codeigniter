@@ -11,7 +11,7 @@
 # <div align="center">LRGEX-CodeIgniter</div>
 
 
-This repository contains the Docker setup for a web application using CodeIgniter 4 on PHP 8.2 with Apache, running on Debian Bookworm.
+This repository contains the Docker setup for a web application development using CodeIgniter 4 on PHP 8.2 with Apache, running on Debian Bookworm.
 
 ## Developers : 
 
