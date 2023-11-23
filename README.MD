@@ -66,7 +66,7 @@ Lrgex-Codeigniter ` included in this repository performs the following actions:
 
 ## Troubleshooting
 
-- If you encounter any issues while accessing the application, ensure the Docker container is running and port 80 is not being used by another process.
+- If you encounter any issues while accessing the application, ensure the Docker container is running and your port in example case 8585 is not being used by another process.
 - you can check the containers logs, for further investigations.
 
 
