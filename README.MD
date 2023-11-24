@@ -70,14 +70,14 @@ Lrgex-Codeigniter ` included in this repository performs the following actions:
 
 Watch for releases and updates.
 
-<img src="./images/githubstar.gif" width="500" alt='github star'/>
+<img src="https://download.lrgex.com/assets/images/givestar.gif" width="500" alt='github star'/>
 
 
 ## Support Me
 
 Please ⭐ star this repository!
 
-If you found my work useful, consider buying me a [<img src="https://download.lrgex.com//coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
+If you found my work useful, consider buying me a [<img src="https://download.lrgex.com/assets/images/coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
 
 
 ## Troubleshooting
