@@ -64,6 +64,22 @@ Lrgex-Codeigniter ` included in this repository performs the following actions:
 - Modifies the `App.php` and `Constants.php` files for CodeIgniter configuration.
 - Uses an entrypoint script to start the Apache server.
 
+## Stay Up-to-Date
+
+⭐ ${\normalsize{\textcolor{goldenrod}{\texttt{Star this project}}}}$
+
+Watch for releases and updates.
+
+<img src="./images/githubstar.gif" width="500" alt='github star'/>
+
+
+## Support Me
+
+Please ⭐ star this repository!
+
+If you found my work useful, consider buying me a [<img src="./images/logo_white_stroke.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
+
+
 ## Troubleshooting
 
 - If you encounter any issues while accessing the application, ensure the Docker container is running and your port in example case 8585 is not being used by another process.
