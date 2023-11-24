@@ -77,7 +77,7 @@ Watch for releases and updates.
 
 Please ⭐ star this repository!
 
-If you found my work useful, consider buying me a [<img src="./images/logo_white_stroke.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
+If you found my work useful, consider buying me a [<img src="https://download.lrgex.com//coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
 
 
 ## Troubleshooting
