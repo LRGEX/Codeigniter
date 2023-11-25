@@ -33,8 +33,12 @@ This repository contains the Docker setup for a web application development usin
 1. **Run the Docker Container**:
    After the image is built, you can run the container using:
    
-   ```dockerfile
-   docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter
+   ```bash
+   # to install codeigniter 4
+   docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter:v4.3.3
+   
+   # to install Codeigniter 4 with bootstrap v5 and all of its dependencies
+   docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter:latest
    ```
    
    - This command runs the Docker container and maps the container's port 80 to port 8585 on your host machine. you can use any host port like -p 80:80 .
@@ -84,5 +88,3 @@ If you found my work useful, consider buying me a [<img src="https://download.lr
 
 - If you encounter any issues while accessing the application, ensure the Docker container is running and your port in example case 8585 is not being used by another process.
 - you can check the containers logs, for further investigations.
-
-
