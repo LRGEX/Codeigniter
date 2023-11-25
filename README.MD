@@ -67,6 +67,7 @@ Lrgex-Codeigniter ` included in this repository performs the following actions:
 - Sets the `ServerName` directive in the Apache configuration.
 - Modifies the `App.php` and `Constants.php` files for CodeIgniter configuration.
 - Uses an entrypoint script to start the Apache server.
+- Prepackaged with node.js npm and Bootstrap 5.
 
 ## Stay Up-to-Date
 
