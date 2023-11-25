@@ -10,59 +10,91 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
+    jq \
     unzip \
     libzip-dev \
-    libicu-dev
-
-# Clear out the local repository of retrieved package files
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions including intl
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl
-
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Install Composer globally
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+    libicu-dev \
+    ca-certificates \
+    gnupg && \
+    a2enmod rewrite && \
+    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    # Install Node.js
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    NODE_MAJOR=21 && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install nodejs -y
+    
 # Set the working directory to the Apache document root
 WORKDIR /var/www/html
 
-# Install CodeIgniter using Composer
-RUN composer create-project codeigniter4/appstarter codeigniter
+# Install Main CodeIgniter 4 with dependencies
 
-# Move CodeIgniter files to the working directory, excluding special directories
-RUN find codeigniter -mindepth 1 -maxdepth 1 -exec mv {} . \; && rm -rf codeigniter
+#   Create a new project
+RUN composer create-project codeigniter4/appstarter codeigniter && \
+    # Move all files from the project root to the current directory
+    find codeigniter -mindepth 1 -maxdepth 1 -exec mv {} . \; && rm -rf codeigniter && \
+    # Create a directory for the project to store some files 
+    mkdir -p /opt/ci && \
+    # Create a flag file to indicate that the container has been initialized
+    touch /opt/ci/flags && \
+    # Create a flag file to indicate that the container has been initialized
+    echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
+    # Install NPM
+    curl -qL https://www.npmjs.com/install.sh | sh && \
+    npm init -y && \
+    # Install Bootstrap
+    npm install bootstrap@5.3.2 --save && \
+    # create directory structure for application
+    mkdir ./public/css && \
+    mkdir ./public/js && \
+    mkdir ./public/assets && \
+    mkdir ./public/scss && \
+    touch ./public/scss/main.scss && \
+    echo "@import '../../node_modules/bootstrap/scss/bootstrap';" >> ./public/scss/main.scss && \
+    touch ./public/js/main.js && \
+    # instal sass
+    npm install sass && \
+    # sed lines in package.json
+    jq '.scripts += {"scss": "npx sass --watch public/scss/main.scss public/css/styles.css"} | del(.scripts.test)' package.json > temp.json && mv temp.json package.json && \
+    # sed -i 's|"test": "echo \\"Error: no test specified\\" && exit 1",|"scss": "npx sass --watch public/scss/main.scss public/css/styles.css",|g' package.json && \
+    # copy env to .env
+    cp env .env && \
+    # sed lines in .env and uncomment
+    sed -i 's/# CI_ENVIRONMENT = production/CI_ENVIRONMENT = development/g' .env
 
-# Create a backup of the application
-RUN mkdir -p /var/www/html_backup && cp -a . /var/www/html_backup
+COPY dep/ /temp/dep/
 
-# Copy Apache configuration file
+
+RUN cp -a /temp/dep/assets/. ./public/assets && \
+    cp -a /temp/dep/css/. ./public/css && \
+    cp -a /temp/dep/js/. ./public/js && \
+    cp -a /temp/dep/scss/. ./public/scss && \
+    cp -a /temp/dep/Views/. ./app/Views && \
+    cp -a /temp/dep/Controllers/. ./app/Controllers && \
+    cp -a /temp/dep/Config/. ./app/Config && \
+    # setting up permissions
+    chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html && \
+    # Create a backup of the original files to be copied over to the project when the container is started for the first time
+    mkdir -p /var/www/html_backup && cp -a . /var/www/html_backup && \
+    # Clean up
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Copy Apache custome configuration files to default location
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-
-# Copy .htaccess file
+# Copy .htaccess file for apache
 COPY .htaccess /var/www/html/.htaccess
-
-# Set permissions for the Apache document root
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Copy the entrypoint script
+COPY docker-entrypoint.sh /opt/ci/docker-entrypoint.sh
 
 # Expose port 80
 EXPOSE 80
 
-# Create a directory for the entrypoint script
-RUN mkdir -p /opt/ci
-
-# Copy the entrypoint script
-COPY docker-entrypoint.sh /opt/ci/docker-entrypoint.sh
-
 # Ensure the entrypoint script is executable
 RUN chmod +x /opt/ci/docker-entrypoint.sh
-
-# Set the ServerName directive
-RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
-    touch /opt/ci/flags
 
 # Start Apache server in the foreground
 ENTRYPOINT ["/opt/ci/docker-entrypoint.sh"]

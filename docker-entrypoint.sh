@@ -8,7 +8,7 @@ cat << "EOF"
 ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝ 
 ┌─┐┌─┐┌┬┐┌─┐╦╔═╗╔╗╔╦╔╦╗╔═╗╦═╗
 │  │ │ ││├┤ ║║ ╦║║║║ ║ ║╣ ╠╦╝
-└─┘└─┘─┴┘└─┘╩╚═╝╝╚╝╩ ╩ ╚═╝╩╚═  v4.3.3                                
+└─┘└─┘─┴┘└─┘╩╚═╝╝╚╝╩ ╩ ╚═╝╩╚═  v4.3.3-2                                
 EOF
 
 
@@ -59,6 +59,15 @@ fi
 echo ""
 echo "Starting Apache..."
 echo ""
+echo "if you want to use bootstrap, please do the following:"
+echo ""
+echo "go to localhost:80/webcontrol in your browser"
+echo ""
+echo "Press Start Sass to start the sass compiler"
+echo ""
+echo "your synced css file with bootstrap will be located in /var/www/html/public/assets/css/style.css"
+echo ""
+echo "if you want change the css file name, please edit the package.json file accordingly"
 
 # Start Apache in the foreground
 exec apache2-foreground
