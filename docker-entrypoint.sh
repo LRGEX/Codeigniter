@@ -33,7 +33,7 @@ if ! grep -q "started" /opt/ci/flags; then
     echo ""
     echo "Configuring Permissions..."
     echo ""
-    # Change ownership to www-data and set appropriate permissions
+    # Change ownership to www-data and set appropriate permissions on the mounted directory
     chown -R www-data:www-data $MOUNTED_DIR
     chmod -R 755 $MOUNTED_DIR
     touch /opt/ci/flags
