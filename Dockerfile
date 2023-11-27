@@ -1,7 +1,7 @@
 # Use PHP 8.2 with Apache on Debian Bookworm as the base image
 FROM php:8.2-apache-bookworm
 
-# Install system dependencies
+# Install system dependencies 
 RUN apt-get update && apt-get install -y \
     git \
     curl \
