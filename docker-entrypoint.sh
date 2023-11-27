@@ -40,6 +40,7 @@ if ! grep -q "started" /opt/ci/flags; then
     echo "started" >> /opt/ci/flags
     echo ""
     echo "Done!"
+    echo ""
     sleep 2
 fi
 
