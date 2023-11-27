@@ -3,7 +3,6 @@ name: ci
 on:
   push:
     branches:
-      - "main"
       - "v4.4.3-clean"
     paths-ignore:
       - '**/README.MD'
