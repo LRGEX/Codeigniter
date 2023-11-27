@@ -8,7 +8,7 @@ on:
       - '**/README.MD'
 
 jobs:
-  main-latest:
+  main-443-bootstrap:
     runs-on: ubuntu-latest
     steps:
       -
@@ -43,4 +43,4 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: lrgex/codeigniter:latest
+          tags: lrgex/codeigniter:4.4.3-bootstrap
