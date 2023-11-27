@@ -35,7 +35,7 @@ This repository contains the Docker setup for a web application development usin
    
    ```bash
    # to install codeigniter 4
-   docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter:v4.3.3
+   docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter:4.4.3
    
    # to install Codeigniter 4 with bootstrap v5 and all of its dependencies
    docker run -d --name lrgex-app -v /path/to/your/app:/var/www/html -p 8585:80 lrgex/codeigniter:latest
