@@ -12,7 +12,7 @@ cat << "EOF"
 EOF
 
 
-# Path to the backup directory 
+# Path to the backup directory
 BACKUP_DIR="/var/www/html_backup"
 
 # Path to the mounted directory

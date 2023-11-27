@@ -1,7 +1,7 @@
 # Use PHP 8.2 with Apache on Debian Bookworm as the base image
 FROM php:8.2-apache-bookworm
 
-# Install system dependencies 
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -59,7 +59,6 @@ RUN composer create-project codeigniter4/appstarter codeigniter && \
     npm install sass && \
     # sed lines in package.json
     jq '.scripts += {"scss": "npx sass --watch public/scss/main.scss public/css/styles.css"} | del(.scripts.test)' package.json > temp.json && mv temp.json package.json && \
-    # sed -i 's|"test": "echo \\"Error: no test specified\\" && exit 1",|"scss": "npx sass --watch public/scss/main.scss public/css/styles.css",|g' package.json && \
     # copy env to .env
     cp env .env && \
     # sed lines in .env and uncomment
