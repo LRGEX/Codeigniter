@@ -7,6 +7,7 @@ on:
       - "v4.4.3-clean"
     paths-ignore:
       - '**/README.MD'
+      - '**/dep'
 
 jobs:
   docker:

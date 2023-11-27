@@ -61,9 +61,8 @@ RUN composer create-project codeigniter4/appstarter codeigniter && \
     # npm install sass && \
     # # sed lines in package.json
     # jq '.scripts += {"scss": "npx sass --watch public/scss/main.scss public/css/styles.css"} | del(.scripts.test)' package.json > temp.json && mv temp.json package.json && \
-    # # sed -i 's|"test": "echo \\"Error: no test specified\\" && exit 1",|"scss": "npx sass --watch public/scss/main.scss public/css/styles.css",|g' package.json && \
-    # # copy env to .env
-    # cp env .env && \
+    # copy env to .env
+    cp env .env && \
     # # sed lines in .env and uncomment
     sed -i 's/# CI_ENVIRONMENT = production/CI_ENVIRONMENT = development/g' .env
 
