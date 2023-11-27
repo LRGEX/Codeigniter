@@ -18,16 +18,8 @@ RUN apt-get update && apt-get install -y \
     gnupg && \
     a2enmod rewrite && \
     docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip intl && \
-    # remove this v
+    # Install Composer
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
-    # curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    # Install Node.js
-    # mkdir -p /etc/apt/keyrings && \
-    # curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    # NODE_MAJOR=21 && \
-    # echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
-    # apt-get update && \
-    # apt-get install nodejs -y
     
 # Set the working directory to the Apache document root
 WORKDIR /var/www/html
@@ -44,38 +36,13 @@ RUN composer create-project codeigniter4/appstarter codeigniter && \
     touch /opt/ci/flags && \
     # Create a flag file to indicate that the container has been initialized
     echo 'ServerName localhost' >> /etc/apache2/apache2.conf && \
-    # # Install NPM
-    # curl -qL https://www.npmjs.com/install.sh | sh && \
-    # npm init -y && \
-    # Install Bootstrap
-    # npm install bootstrap@5.3.2 --save && \
-    # create directory structure for application
-    # mkdir ./public/css && \
-    # mkdir ./public/js && \
-    # mkdir ./public/assets && \
-    # mkdir ./public/scss && \
-    # touch ./public/scss/main.scss && \
-    # echo "@import '../../node_modules/bootstrap/scss/bootstrap';" >> ./public/scss/main.scss && \
-    # touch ./public/js/main.js && \
-    # # instal sass
-    # npm install sass && \
-    # # sed lines in package.json
-    # jq '.scripts += {"scss": "npx sass --watch public/scss/main.scss public/css/styles.css"} | del(.scripts.test)' package.json > temp.json && mv temp.json package.json && \
     # copy env to .env
     cp env .env && \
     # # sed lines in .env and uncomment
     sed -i 's/# CI_ENVIRONMENT = production/CI_ENVIRONMENT = development/g' .env
 
-# COPY dep/ /temp/dep/
 
 
-# RUN cp -a /temp/dep/assets/. ./public/assets && \
-#     cp -a /temp/dep/css/. ./public/css && \
-#     cp -a /temp/dep/js/. ./public/js && \
-#     cp -a /temp/dep/scss/. ./public/scss && \
-#     cp -a /temp/dep/Views/. ./app/Views && \
-#     cp -a /temp/dep/Controllers/. ./app/Controllers && \
-#     cp -a /temp/dep/Config/. ./app/Config && \
     # setting up permissions
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html && \
