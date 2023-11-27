@@ -30,8 +30,8 @@ This repository contains the Docker setup for a web application development usin
 
 
 
-1. **Run the Docker Container**:
-   After the image is built, you can run the container using:
+1. **Run on a Docker Container**:
+    run the container using:
    
    ```bash
    # to install codeigniter 4
@@ -50,7 +50,7 @@ This repository contains the Docker setup for a web application development usin
    
    
 5. **Access the Application**:
-   Once the container is running, you can access the CodeIgniter application by visiting `http://your-ip:port and codeigniter welcoming page.  
+   Once the container is running, you can access the CodeIgniter application by visiting `http://your-ip:port.
 
 ## LRGEX-Codeigniter  Details
 
@@ -65,7 +65,7 @@ Lrgex-Codeigniter ` included in this repository performs the following actions:
 - Sets appropriate permissions for the Apache document root.
 - Exposes port 80 for web access.
 - Sets the `ServerName` directive in the Apache configuration.
-- Modifies the `App.php` and `Constants.php` files for CodeIgniter configuration.
+- Modifies the `App.php` and `Constants.php` files for CodeIgniter configuration so that you can dynamically use localhost.
 - Uses an entrypoint script to start the Apache server.
 - Prepackaged with node.js npm and Bootstrap 5.
 
