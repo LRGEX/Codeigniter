@@ -26,6 +26,7 @@ if [ -z "$(ls -A $MOUNTED_DIR)" ]; then
     cp -a $BACKUP_DIR/. $MOUNTED_DIR/
     echo ""
     echo "Done!"
+    echo ""
     sleep 2
 fi
 
