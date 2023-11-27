@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "main"
-      - "v4.4.3 clean"
+      - "v4.4.3-clean"
     paths-ignore:
       - '**/README.MD'
 
