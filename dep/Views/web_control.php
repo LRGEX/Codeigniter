@@ -40,7 +40,7 @@
             <br>
             <form method="post" action="">
                 <div class="temp text-center">
-                    <p>Press to activate bootsrap watcher</p>
+                    <p>Press to activate bootstrap watcher</p>
                     <button id="toggleSassButton" type="button" class="btn btn-primary">Start Sass</button>
                     <div id="sassOutput"></div>
                 </div>
